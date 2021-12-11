@@ -13,6 +13,8 @@ flutter:
         default_package: playit_video_player
       macos:
         default_package: playit_dart_vlc
+      windows:
+        default_package: playit_dart_vlc
 
 dependencies:
   flutter:
