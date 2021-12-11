@@ -1,0 +1,32 @@
+name: playit_video_player
+description: A new Flutter package project.
+version: 0.0.1
+# homepage:
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.8.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  video_player: ^2.2.7
+
+  playit_common:
+    path: ../playit_common
+  ffmpeg_kit_flutter_full_gpl: ^4.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  plugin:
+    implements: playit
+    platforms:
+      android:
+        dartPluginClass: ItPlayerControllerVideoPlayer
