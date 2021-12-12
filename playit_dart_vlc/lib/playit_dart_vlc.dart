@@ -79,4 +79,10 @@ class ItPlayerControllerVLC extends ItPlayerController {
       _player.videoDimensions.height,
     );
   }
+
+  @override
+  void dispose() {
+    _player.dispose();
+    super.dispose();
+  }
 }

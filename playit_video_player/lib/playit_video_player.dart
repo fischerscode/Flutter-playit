@@ -98,4 +98,10 @@ class ItPlayerControllerVideoPlayer extends ItPlayerController {
     ItPlayerController.constructor =
         (source) => ItPlayerControllerVideoPlayer(source);
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
