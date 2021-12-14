@@ -12,6 +12,8 @@ abstract class ItPlayerController extends ValueNotifier<ItPlayerValue> {
   /// Pause the video
   Future<void> pause();
 
+  void seekTo(Duration position);
+
   /// Build the player widget
   Widget buildPlayer();
 

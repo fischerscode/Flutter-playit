@@ -52,6 +52,7 @@ class ItPlayerControllerVLC extends ItPlayerController {
     return Video(
       key: ObjectKey(this),
       player: _player,
+      showControls: false,
     );
   }
 
@@ -84,5 +85,11 @@ class ItPlayerControllerVLC extends ItPlayerController {
   void dispose() {
     _player.dispose();
     super.dispose();
+  }
+
+  @override
+  void seekTo(Duration position) {
+    _player.seek(position);
+    value = value.copyWith(position: position);
   }
 }

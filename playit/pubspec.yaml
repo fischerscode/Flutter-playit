@@ -9,22 +9,23 @@ environment:
 flutter:
   plugin:
     platforms:
-      android:
-        default_package: playit_video_player
       macos:
         default_package: playit_dart_vlc
       windows:
         default_package: playit_dart_vlc
+      android:
+        default_package: playit_video_player
 
 dependencies:
   flutter:
     sdk: flutter
   playit_common:
     path: ../playit_common
-  playit_video_player:
-    path: ../playit_video_player
   playit_dart_vlc:
     path: ../playit_dart_vlc
+  playit_video_player:
+    path: ../playit_video_player
+  audio_video_progress_bar: ">=0.9.0 <1.0.0"
 
 dev_dependencies:
   flutter_test:

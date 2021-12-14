@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:ffmpeg_kit_flutter_full_gpl/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_flutter_full_gpl/return_code.dart';
 import 'package:flutter/widgets.dart';
 import 'package:playit_common/playit_common.dart';
 import 'package:video_player/video_player.dart';
@@ -72,18 +71,6 @@ class ItPlayerControllerVideoPlayer extends ItPlayerController {
       }
     });
     return completer.future;
-    // final filename = await VideoThumbnail.thumbnailFile(
-    //     video: _controller.dataSource,
-    //     imageFormat: ImageFormat.JPEG,
-    //     quality: 100,
-    //     thumbnailPath: path,
-    //     timeMs: (await _controller.position)?.inMilliseconds ??
-    //         _controller.value.position.inMilliseconds);
-    // if (filename != null) {
-    //   return filename;
-    // } else {
-    //   throw Exception("Failed to generate snapshot");
-    // }
   }
 
   static String _durationToFFmpeg(Duration duration) {
@@ -94,7 +81,6 @@ class ItPlayerControllerVideoPlayer extends ItPlayerController {
   }
 
   static void registerWith() {
-    print("***************REGISTER***************");
     ItPlayerController.constructor =
         (source) => ItPlayerControllerVideoPlayer(source);
   }
@@ -103,5 +89,10 @@ class ItPlayerControllerVideoPlayer extends ItPlayerController {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void seekTo(Duration position) {
+    _controller.seekTo(position);
   }
 }

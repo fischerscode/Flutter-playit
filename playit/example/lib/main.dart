@@ -83,7 +83,23 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: controller != null ? ItPlayer(controller!) : Container(),
+        child: controller != null
+            ? Stack(
+                children: [
+                  ItPlayer(controller!),
+                  Center(
+                    child: PlayPauseButton(
+                      controller: controller!,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  ),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: PlayerProgressBar(controller: controller!)),
+                ],
+              )
+            : Container(),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
