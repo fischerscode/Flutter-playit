@@ -1,6 +1,7 @@
 part of playit_platform_interface;
 
-abstract class ItPlayerController extends ValueNotifier<ItPlayerValue> {
+abstract class ItPlayerController<SourceType extends PlayItSource>
+    extends ValueNotifier<ItPlayerValue> {
   ItPlayerController.internal([ItPlayerValue? value])
       : super(value ?? ItPlayerValue(duration: Duration.zero));
 
@@ -23,10 +24,12 @@ abstract class ItPlayerController extends ValueNotifier<ItPlayerValue> {
   Future<void> takeSnapshot(String outFile);
 
   factory ItPlayerController(PlayItSource source) {
-    return constructor(source);
+    return constructor(source) as ItPlayerController<SourceType>;
   }
 
   static ItPlayerController _create(dynamic sources) {
     throw Exception("Stup!");
   }
+
+  SourceType get source;
 }

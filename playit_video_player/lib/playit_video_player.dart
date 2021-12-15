@@ -8,9 +8,11 @@ import 'package:flutter/widgets.dart';
 import 'package:playit_common/playit_common.dart';
 import 'package:video_player/video_player.dart';
 
-class ItPlayerControllerVideoPlayer extends ItPlayerController {
+class ItPlayerControllerVideoPlayer<SourceType extends PlayItSource>
+    extends ItPlayerController<SourceType> {
   late VideoPlayerController _controller;
-  final PlayItSource source;
+  @override
+  final SourceType source;
 
   ItPlayerControllerVideoPlayer(this.source) : super.internal() {
     final source = this.source;
@@ -81,8 +83,15 @@ class ItPlayerControllerVideoPlayer extends ItPlayerController {
   }
 
   static void registerWith() {
-    ItPlayerController.constructor =
-        (source) => ItPlayerControllerVideoPlayer(source);
+    ItPlayerController.constructor = (source) {
+      if (source is PlayItFileSource) {
+        return ItPlayerControllerVideoPlayer<PlayItFileSource>(source);
+      } else if (source is PlayItNetworkSource) {
+        return ItPlayerControllerVideoPlayer<PlayItNetworkSource>(source);
+      } else {
+        throw Exception("Unimplemented source type ${source.runtimeType}");
+      }
+    };
   }
 
   @override

@@ -8,12 +8,16 @@ import 'package:dart_vlc/dart_vlc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:playit_common/playit_common.dart';
 
-class ItPlayerControllerVLC extends ItPlayerController {
+class ItPlayerControllerVLC<SourceType extends PlayItSource>
+    extends ItPlayerController<SourceType> {
   final Player _player;
+  @override
+  final SourceType source;
 
-  ItPlayerControllerVLC(PlayItSource source)
+  ItPlayerControllerVLC(this.source)
       : _player = Player(id: DateTime.now().millisecond),
         super.internal() {
+    final source = this.source;
     if (source is PlayItNetworkSource) {
       _player.add(Media.network(
         source.resource,
@@ -68,7 +72,15 @@ class ItPlayerControllerVLC extends ItPlayerController {
 
   static void registerWith() {
     DartVLC.initialize();
-    ItPlayerController.constructor = (source) => ItPlayerControllerVLC(source);
+    ItPlayerController.constructor = (source) {
+      if (source is PlayItFileSource) {
+        return ItPlayerControllerVLC<PlayItFileSource>(source);
+      } else if (source is PlayItNetworkSource) {
+        return ItPlayerControllerVLC<PlayItNetworkSource>(source);
+      } else {
+        throw Exception("Unimplemented source type ${source.runtimeType}");
+      }
+    };
   }
 
   @override
