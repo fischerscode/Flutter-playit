@@ -14,6 +14,8 @@ abstract class ItPlayerController extends ValueNotifier<ItPlayerValue> {
 
   void seekTo(Duration position);
 
+  void setPlaybackSpeed(double speed);
+
   /// Build the player widget
   Widget buildPlayer();
 

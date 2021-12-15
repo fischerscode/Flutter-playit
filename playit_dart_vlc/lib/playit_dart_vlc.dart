@@ -92,4 +92,9 @@ class ItPlayerControllerVLC extends ItPlayerController {
     _player.seek(position);
     value = value.copyWith(position: position);
   }
+
+  @override
+  void setPlaybackSpeed(double speed) {
+    _player.setRate(speed);
+  }
 }

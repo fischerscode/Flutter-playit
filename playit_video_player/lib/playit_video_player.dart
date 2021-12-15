@@ -95,4 +95,9 @@ class ItPlayerControllerVideoPlayer extends ItPlayerController {
   void seekTo(Duration position) {
     _controller.seekTo(position);
   }
+
+  @override
+  void setPlaybackSpeed(double speed) {
+    _controller.setPlaybackSpeed(speed);
+  }
 }
